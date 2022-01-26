@@ -1,9 +1,36 @@
-$backgroundColor: rgb(238, 238, 238);
+@import "./Variables.scss";
 
 .container {
-  background-color: $backgroundColor;
-  padding: 20px;
-  width: 250px;
+  background-color: $weatherCardBackgroundColor;
+  padding: 40px 30px;
+  width: 300px;
   height: 400px;
   border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgb(143, 143, 143) 0px 0px 20px;
+  margin: 20px;
+
+  .cityName {
+    @include Title();
+  }
+
+  .weatherIcon {
+    width: 200px;
+  }
+
+  .temprature {
+    font-size: 50px;
+    margin: 10px;
+  }
+
+  .minMaxContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
 }

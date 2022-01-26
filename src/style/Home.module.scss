@@ -1,0 +1,22 @@
+.mainContent {
+  height: calc(100vh - 40px);
+  background-image: linear-gradient(
+    to top,
+    rgb(0, 102, 255),
+    rgb(228, 228, 228)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .weatherCardContainer {
+    overflow: scroll;
+    width: 100vw;
+
+    .weatherCardContainer__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

@@ -1,11 +1,10 @@
 import React from "react"
-import WeatherCard from "./components/WeatherCard"
+import Home from "./pages/Home"
 
 function App() {
   return (
     <div className="App">
-      <p>This is React app</p>
-      <WeatherCard />
+      <Home />
     </div>
   )
 }

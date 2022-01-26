@@ -1,0 +1,11 @@
+//NavBar
+
+// Weather Card
+$weatherCardBackgroundColor: rgb(255, 255, 255);
+$titleColor: rgb(31, 31, 31);
+
+@mixin Title {
+  font-size: 25px;
+  font-weight: bold;
+  color: $titleColor;
+}
