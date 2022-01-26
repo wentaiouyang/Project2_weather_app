@@ -1,0 +1,9 @@
+$backgroundColor: rgb(238, 238, 238);
+
+.container {
+  background-color: $backgroundColor;
+  padding: 20px;
+  width: 250px;
+  height: 400px;
+  border-radius: 10px;
+}
