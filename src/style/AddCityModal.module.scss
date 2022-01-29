@@ -1,0 +1,68 @@
+@import "./Variables.scss";
+@mixin buttonStyle {
+  width: 100px;
+  height: 30px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+}
+.ModalBackground {
+  background-color: #46454569;
+  backdrop-filter: blur(20px);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+
+  .modal {
+    width: 400px;
+    height: 200px;
+    background-color: $weatherCardBackgroundColor;
+    padding: 40px 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .cityInput {
+      width: 80%;
+      height: 35px;
+      font-size: 20px;
+      border-radius: 30px;
+      border: 1px solid rgb(204, 204, 204);
+      padding: 0 20px;
+    }
+    .btnContainer {
+      min-width: 200px;
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-evenly;
+      .addBtn {
+        @include buttonStyle();
+        background-color: rgb(167, 176, 228);
+      }
+
+      .cancelBtn {
+        @include buttonStyle();
+      }
+    }
+  }
+}
+
+@include media($phone) {
+  .ModalBackground {
+    .modal {
+      width: 80%;
+      .cityInput {
+      }
+      .btnContainer {
+      }
+    }
+  }
+} ;

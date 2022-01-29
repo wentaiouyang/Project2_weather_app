@@ -10,10 +10,30 @@ export default class Provider extends Component {
           theme: status,
         })
       },
-      cities: ["Brisbane", "Beijing", "Tokyo"],
+      cities: JSON.parse(localStorage.getItem("cities")) || ["Brisbane"],
+      addCity: (city) => {
+        if (this.state.cities.includes(city)) {
+          alert("This city already exists!")
+        } else {
+          const newCities = this.state.cities
+          newCities.push(city)
+          this.setState({
+            cities: newCities,
+          })
+          localStorage.setItem("cities", JSON.stringify(newCities))
+        }
+      },
+      removeCity: (city) => {
+        const newCities = this.state.cities.filter((item) => {
+          return item !== city
+        })
+        this.setState({
+          cities: newCities,
+        })
+        localStorage.setItem("cities", JSON.stringify(newCities))
+      },
       getCurrentTime: () => {
         const hour = new Date().getHours()
-        console.log(hour)
         if (hour > 6 && hour <= 12) {
           return "day"
         } else if (hour > 12 && hour <= 18) {
@@ -22,6 +42,12 @@ export default class Provider extends Component {
           return "night"
         }
       },
+    }
+  }
+
+  componentDidMount() {
+    if (!localStorage.getItem("cities")) {
+      localStorage.setItem("cities", `["Brisbane"]`)
     }
   }
   render() {

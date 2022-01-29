@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react"
 import { useEffect } from "react/cjs/react.development"
 import classes from "../style/NavBar.module.scss"
 
-function NavBar({ canAdd }) {
+function NavBar({ canAdd, openModal }) {
   const [currentTime, setCurrentTime] = useState(
     new Date().toLocaleTimeString()
   )
@@ -20,7 +20,11 @@ function NavBar({ canAdd }) {
   return (
     <div className={classes.navBarContainer}>
       <section>
-        {canAdd && <button className={classes.addBtn}>Add</button>}
+        {canAdd && (
+          <button className={classes.addBtn} onClick={openModal}>
+            Add
+          </button>
+        )}
       </section>
       <p>
         <b>Today</b>

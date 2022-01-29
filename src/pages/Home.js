@@ -8,11 +8,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Context } from "../context/context"
+import AddCityModal from "../components/AddCityModal"
+import { useEffect } from "react/cjs/react.development"
 
 function Home() {
   const [counter, setCounter] = useState(0)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const { state } = useContext(Context)
   const { getCurrentTime, cities } = state
+
+  useEffect(() => {
+    if (cities.length < 3) {
+      setCounter(0)
+    } else {
+      setCounter(1)
+    }
+  }, [cities])
 
   const handleNext = () => {
     if (counter < cities.length - 1) {
@@ -55,12 +66,13 @@ function Home() {
 
   return (
     <div className={classes.homeContainer}>
-      <NavBar canAdd={true} />
+      {isModalOpen && <AddCityModal closeModal={() => setIsModalOpen(false)} />}
+      <NavBar canAdd={true} openModal={() => setIsModalOpen(true)} />
       <section className={classes.mainContent}>
         <div className={classes.greetingContainer}>
           {getCurrentTime() === "day" ? (
             <p>Good Morning!</p>
-          ) : getCurrentTime === "afternoon" ? (
+          ) : getCurrentTime() === "afternoon" ? (
             <p>Good Afternoon!</p>
           ) : (
             <p>Good Evening!</p>

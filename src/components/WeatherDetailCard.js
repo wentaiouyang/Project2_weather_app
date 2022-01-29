@@ -5,8 +5,17 @@ import {
   AnimatedWeatherTypes,
   AnimatedWeatherTimes,
 } from "animated-weather-icon"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  faArrowAltCircleDown,
+  faThermometer,
+  faThermometerHalf,
+  faTint,
+  faWater,
+  faWind,
+} from "@fortawesome/free-solid-svg-icons"
 
-function WeatherDetailCard({ city, data }) {
+function WeatherDetailCard({ city, weatherData }) {
   useEffect(() => {
     const iconSet = {
       "01d": AnimatedWeatherTypes.Clear,
@@ -34,12 +43,15 @@ function WeatherDetailCard({ city, data }) {
         return iconSet[icon]
       }
     }
-    if (data) {
+    if (weatherData) {
       const renderTarget = document.querySelector(`#${city}-detail`)
       const icon = new AnimatedWeatherIcon(renderTarget)
-      icon.setType(getIcon(data.weather[0].icon), AnimatedWeatherTimes.Day)
+      icon.setType(
+        getIcon(weatherData.weather[0].icon),
+        AnimatedWeatherTimes.Day
+      )
     }
-  }, [city, data])
+  }, [city, weatherData])
 
   const displayTemp = (temp) => {
     if (temp) {
@@ -54,36 +66,48 @@ function WeatherDetailCard({ city, data }) {
         <div className={classes.tempratureContainer}>
           <p className={classes.cityName}>{city}</p>
           <p className={classes.temprature}>
-            {data && displayTemp(data.main.temp)} °C
+            {weatherData && displayTemp(weatherData.main.temp)} °C
           </p>
           <p className={classes.minMax}>
-            <b>Min:</b> {data ? displayTemp(data.main.temp_min) : "-"} °C |{" "}
+            <b>Min:</b>{" "}
+            {weatherData ? displayTemp(weatherData.main.temp_min) : "-"} °C |{" "}
             <b>Max:</b>
-            {data ? displayTemp(data.main.temp_max) : "-"} °C
+            {weatherData ? displayTemp(weatherData.main.temp_max) : "-"} °C
           </p>
         </div>
         <div className={classes.iconContainer}>
           <div id={`${city}-detail`} className={classes.icon}></div>
         </div>
       </div>
+
       <div className={classes.detailInfo}>
         <div>
           <p>
-            <b>Feels Like:</b> {data ? data.main.feels_like : "-"} °C
+            <FontAwesomeIcon icon={faThermometerHalf} size="md" color="grey" />
+            <b>Feels Like:</b>{" "}
+            {weatherData ? displayTemp(weatherData.main.feels_like) : "-"} °C
           </p>
           <p>
-            <b>Wind:</b> {data ? data.wind.speed : "-"} km/h
+            <FontAwesomeIcon icon={faWind} size="md" color="grey" />
+            <b>Wind:</b> {weatherData ? weatherData.wind.speed : "-"} km/h
           </p>
         </div>
         <div>
           <p>
-            <b>Pressure:</b> {data ? data.main.pressure : "-"} mb
+            <FontAwesomeIcon
+              icon={faArrowAltCircleDown}
+              size="md"
+              color="grey"
+            />
+            <b>Pressure:</b> {weatherData ? weatherData.main.pressure : "-"} mb
           </p>
           <p>
-            <b>Humidity:</b> {data ? data.main.humidity : "-"} %
+            <FontAwesomeIcon icon={faTint} size="md" color="grey" />
+            <b>Humidity:</b> {weatherData ? weatherData.main.humidity : "-"} %
           </p>
         </div>
       </div>
+      <div className={classes.forecast}></div>
     </div>
   )
 }

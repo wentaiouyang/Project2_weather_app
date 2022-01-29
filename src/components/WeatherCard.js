@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import classes from "../style/WeatherCard.module.scss"
 import { API_KEY, WEATHER_API } from "../api/endpoint"
 import { useNavigate } from "react-router-dom"
@@ -8,10 +8,15 @@ import {
   AnimatedWeatherTypes,
   AnimatedWeatherTimes,
 } from "animated-weather-icon"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTrash } from "@fortawesome/free-solid-svg-icons"
+import { Context } from "../context/context"
 
 function WeatherCard({ city }) {
   const cityName = city.replace(" ", "_")
   const [weatherData, setWeatherData] = useState(null)
+  const { state } = useContext(Context)
+  const { removeCity } = state
   const navigate = useNavigate()
   const displayTemp = (temp) => {
     if (temp) {
@@ -81,6 +86,11 @@ function WeatherCard({ city }) {
     navigate(`/weather/${cityName}`)
   }
 
+  const handleDelete = (e) => {
+    e.stopPropagation()
+    removeCity(city)
+  }
+
   return (
     <div className={classes.container} onClick={handleClickCard}>
       <p className={classes.cityName}>{weatherData && weatherData.name}</p>
@@ -91,6 +101,9 @@ function WeatherCard({ city }) {
       <p className={classes.weatherText}>
         {weatherData && weatherData.weather[0].main}
       </p>
+      <div className={classes.delete} onClick={(e) => handleDelete(e)}>
+        <FontAwesomeIcon icon={faTrash} color="grey" size="md" />
+      </div>
     </div>
   )
 }
