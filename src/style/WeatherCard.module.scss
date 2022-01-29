@@ -3,8 +3,8 @@
 .container {
   background-color: $weatherCardBackgroundColor;
   padding: 40px 30px;
-  width: 300px;
-  height: 400px;
+  width: 270px;
+  height: 350px;
   border-radius: 10px;
   text-align: center;
   display: flex;
@@ -12,25 +12,23 @@
   align-items: center;
   justify-content: center;
   box-shadow: rgb(143, 143, 143) 0px 0px 20px;
-  margin: 20px;
+  margin: 0 35px;
+  cursor: pointer;
 
   .cityName {
     @include Title();
   }
 
   .weatherIcon {
-    width: 200px;
+    width: 150px;
   }
 
   .temprature {
-    font-size: 50px;
-    margin: 10px;
+    font-size: 40px;
+    margin: 5px;
   }
 
-  .minMaxContainer {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+  .weatherText {
+    font-size: 20px;
   }
 }

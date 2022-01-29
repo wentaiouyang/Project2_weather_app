@@ -1,22 +1,91 @@
-.mainContent {
-  height: calc(100vh - 40px);
+@mixin pageBtn {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 100%;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.homeContainer {
   background-image: linear-gradient(
     to top,
     rgb(0, 102, 255),
     rgb(228, 228, 228)
   );
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .mainContent {
+    height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    overflow: hidden;
 
-  .weatherCardContainer {
-    overflow: scroll;
-    width: 100vw;
-
-    .weatherCardContainer__wrapper {
+    .btnContainer {
+      margin-top: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
+      ul {
+        width: 100px;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        li {
+          width: 10px;
+          height: 10px;
+          border-radius: 100%;
+          margin: 3px;
+          background-color: rgb(146, 146, 146);
+        }
+      }
+
+      .prevBtn {
+        @include pageBtn;
+      }
+
+      .nextBtn {
+        @include pageBtn;
+      }
+    }
+
+    .greetingContainer {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      font-weight: 300;
+
+      p {
+        margin: 0;
+        font-size: 30px;
+        text-align: left;
+      }
+    }
+
+    .weatherCardContainer {
+      overflow: hidden;
+      display: grid;
+      width: 1200px;
+      height: 430px;
+      position: relative;
+      &::-webkit-scrollbar {
+        width: 0 !important;
+      }
+
+      .weatherCardContainer__wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-flow: row nowrap;
+        transition: all 500ms ease-in-out;
+      }
     }
   }
 }

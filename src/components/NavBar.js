@@ -1,17 +1,32 @@
-import React from "react"
+import React, { useState, useRef } from "react"
+import { useEffect } from "react/cjs/react.development"
 import classes from "../style/NavBar.module.scss"
 
-function NavBar() {
+function NavBar({ canAdd }) {
+  const [currentTime, setCurrentTime] = useState(
+    new Date().toLocaleTimeString()
+  )
+
+  const timer = useRef()
+
+  useEffect(() => {
+    timer.current = setInterval(() => {
+      setCurrentTime(new Date().toLocaleTimeString())
+    }, 1000)
+
+    return () => clearInterval(timer.current)
+  }, [])
+
   return (
     <div className={classes.navBarContainer}>
       <section>
-        <p>Weather App</p>
+        {canAdd && <button className={classes.addBtn}>Add</button>}
       </section>
       <p>
         <b>Today</b>
       </p>
       <section>
-        <p>{new Date().toLocaleTimeString()}</p>
+        <p>{currentTime}</p>
       </section>
     </div>
   )

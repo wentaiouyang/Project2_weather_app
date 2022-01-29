@@ -1,11 +1,17 @@
 import React from "react"
-import Home from "./pages/Home"
+import Provider from "./context/context"
+import { BrowserRouter } from "react-router-dom"
+import Router from "./routes/Router"
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <Provider>
+      <BrowserRouter>
+        <div className="App">
+          <Router />
+        </div>
+      </BrowserRouter>
+    </Provider>
   )
 }
 
